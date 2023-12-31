@@ -1,4 +1,5 @@
 using BepInEx;
+using HarmonyLib;
 using JetBrains.Annotations;
 using SpaceWarp;
 using SpaceWarp.API.Mods;
@@ -17,14 +18,18 @@ public class ShoemakerPlugin : BaseSpaceWarpPlugin
     // Singleton instance of the plugin class
     [PublicAPI] public static ShoemakerPlugin Instance { get; set; }
 
+    public void Awake()
+    {
+        Instance = this;
+        Harmony.CreateAndPatchAll(GetType().Assembly);
+    }
+
     /// <summary>
     /// Runs when the mod is first initialized.
     /// </summary>
     public override void OnInitialized()
     {
         base.OnInitialized();
-
-        Instance = this;
     }
 }
 
