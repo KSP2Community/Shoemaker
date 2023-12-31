@@ -6,7 +6,7 @@
   "description": "A tool to enable planet modding for KSP2 via Patch Manager",
   "source": "https://github.com/KSP2Community/Shoemaker",
   "version": "0.1.0",
-  "version_check": "https://github.com/KSP2Community/Shoemaker/plugin_template/swinfo.json",
+  "version_check": "https://raw.githubusercontent.com/KSP2Community/Shoemaker/main/plugin_template/swinfo.json",
   "ksp2_version": {
     "min": "0.2.0",
     "max": "*"
