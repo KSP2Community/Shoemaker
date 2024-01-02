@@ -17,13 +17,14 @@ internal static class AtmosphereScatterManagerPatches
         LogInfo($"The atmosphere model for {model.PlanetName} has been loaded");
         LogInfo($"Bottom radius: {model.BottomRadius} km");
         LogInfo($"Height: {model.AtmosphereHeight} km");
-        var newData = GameManager.Instance.Game.CelestialBodies.Get(model.PlanetName) ??
-                      GameManager.Instance.Game.CelestialBodies.Get(char.ToUpper(model.PlanetName[0]) +
-                                                                    model.PlanetName[1..]);
-        var origRadius = model.BottomRadius;
-        model.BottomRadius = (float)(newData.data.radius / 1000.0);
-        // this will slightly expand out kerbins clouds as well
-        model.AtmosphereHeight = (float)(newData.data.atmosphereDepth / 1000.0);
-        model.AbsorptionHeightMinMax *= model.BottomRadius/origRadius;
+        LogInfo($"Absorption Height min-max: {model.AbsorptionHeightMinMax.x} - {model.AbsorptionHeightMinMax.y}");
+        if (OverrideManager.AtmosphereOverrides.TryGetValue(model.PlanetName, out var @override))
+        {
+            @override.ApplyTo(model);
+            LogInfo($"After overrides applied: ");
+            LogInfo($"Bottom radius: {model.BottomRadius} km");
+            LogInfo($"Height: {model.AtmosphereHeight} km");
+            LogInfo($"Absorption Height Min max: {model.AbsorptionHeightMinMax.x} - {model.AbsorptionHeightMinMax.y}");
+        }
     }
 }

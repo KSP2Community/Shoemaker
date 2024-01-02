@@ -3,29 +3,29 @@ using KSP;
 using KSP.Game;
 using KSP.Sim.impl;
 using UnityEngine;
-using Object = System.Object;
 
 namespace Shoemaker.Patches;
 
 [HarmonyPatch(typeof(CelestialBodyBehavior))]
 internal static class CelestialBodyBehaviourPatches
 {
+    
     [HarmonyPatch(nameof(CelestialBodyBehavior.OnScaledSpaceViewInstantiated))]
     [HarmonyPrefix]
     internal static void MergeData(CelestialBodyBehavior __instance, GameObject instance)
     {
         var data = instance.GetComponent<CoreCelestialBodyData>();
+        var oldRadius = data.Data.radius;
         var name = data.Data.bodyName;
         var newData =  GameManager.Instance.Game.CelestialBodies.Get(name);
+        var newRadius = newData.data.radius;
+        OverrideManager.Scales.TryAdd(name.ToLowerInvariant(), newRadius / oldRadius);
         data.core = newData;
-        // var name = __instance.CelestialBodyData.Data.bodyName;
-        // var newData = GameManager.Instance.Game.CelestialBodies.Get(name);
-        // __instance._coreCelestialBodyData.core = newData;
         
         LogInfo(
             $"Following info is from the scaled space load of {data.Data.bodyName}");
         LogInfo("The scaled space object has the following components:\n");
-        foreach (var component in instance.GetComponents(typeof(Object)))
+        foreach (var component in instance.GetComponents(typeof(UnityObject)))
         {
             LogInfo($"- {component.GetType()}");
         }
@@ -39,7 +39,7 @@ internal static class CelestialBodyBehaviourPatches
             $"Following info is from the local space load of {__instance.CelestialBodyData.Data.bodyName}");
         LogInfo($"The celestial body has a radius of {__instance.CelestialBodyData.Data.radius}");
         LogInfo("The local space object has the following components:\n");
-        foreach (var component in obj.GetComponents(typeof(Object)))
+        foreach (var component in obj.GetComponents(typeof(UnityObject)))
         {
             LogInfo($"- {component.GetType()}");
         }
@@ -67,5 +67,8 @@ internal static class CelestialBodyBehaviourPatches
                 }
             }
         }
+        // var scale = OverrideManager.Scales[__instance.CelestialBodyData.Data.bodyName];
+        
+        // obj.transform.localScale *= (float)scale;
     }
 }
