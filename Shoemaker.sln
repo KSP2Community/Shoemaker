@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{F92A9EF1-DB19-4D70-BD93-CE74B23D05D4}") = "Shoemaker", "src/Shoemaker/Shoemaker.csproj", "{4D27CE61-02F2-4875-AFF5-562E08AED4B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shoemaker.Patcher", "src\Shoemaker.Patcher\Shoemaker.Patcher.csproj", "{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,14 @@ Global
 		{4D27CE61-02F2-4875-AFF5-562E08AED4B1}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
 		{4D27CE61-02F2-4875-AFF5-562E08AED4B1}.DeployAndRun|Any CPU.ActiveCfg = DeployAndRun|Any CPU
 		{4D27CE61-02F2-4875-AFF5-562E08AED4B1}.DeployAndRun|Any CPU.Build.0 = DeployAndRun|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.Deploy|Any CPU.ActiveCfg = Deploy|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.DeployAndRun|Any CPU.ActiveCfg = DeployAndRun|Any CPU
+		{0890A4C1-4D12-4AA2-AF60-9E31266D9C1A}.DeployAndRun|Any CPU.Build.0 = DeployAndRun|Any CPU
 	EndGlobalSection
 EndGlobal
 

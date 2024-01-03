@@ -12,6 +12,7 @@
         <Message Text="Cleaning up previous build directory"/>
         <RemoveDir Directories="$(SolutionDir)/dist/$(ConfigurationName)"/>
         <MakeDir Directories="$(SolutionDir)/dist/$(ConfigurationName)/BepInEx/plugins/$(ProjectName)"/>
+        <MakeDir Directories="$(SolutionDir)/dist/$(ConfigurationName)/BepInEx/patchers/$(ProjectName)"/>
 
         <!-- Copying general files to build directory -->
         <ItemGroup Label="Plugin template folder to be copied">
@@ -45,7 +46,25 @@
         <Copy Condition="$(ConfigurationName) == Debug Or $(ConfigurationName) == Deploy Or $(ConfigurationName) == DeployAndRun"
               SourceFiles="@(PluginPDBs)"
               DestinationFolder="$(SolutionDir)/dist/$(ConfigurationName)/BepInEx/plugins/$(ProjectName)"/>
+        
+        <!-- Copying compiled patcher to build directory -->
+        <Message Text="Copying patcher DLLs to build directory"/>
+        <ItemGroup Label="Patcher DLLs to be copied">
+            <PatcherDLLs Include="$(PatcherBinPath)/**/*.dll"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(PatcherDLLs)"
+              DestinationFolder="$(SolutionDir)/dist/$(ConfigurationName)/BepInEx/patchers/$(ProjectName)"/>
 
+        <Message Text="Copying patcher PDBs to build directory"
+                 Condition="$(ConfigurationName) == Debug Or $(ConfigurationName) == Deploy Or $(ConfigurationName) == DeployAndRun"/>
+        <ItemGroup Label="Patcher PDBs to be copied">
+            <PatcherPDBs Include="$(PatcherBinPath)/**/*.pdb"/>
+        </ItemGroup>
+        <Copy Condition="$(ConfigurationName) == Debug Or $(ConfigurationName) == Deploy Or $(ConfigurationName) == DeployAndRun"
+              SourceFiles="@(PatcherPDBs)"
+              DestinationFolder="$(SolutionDir)/dist/$(ConfigurationName)/BepInEx/patchers/$(ProjectName)"/>
+        
+        
         <!-- Compressing build directory for release -->
         <Message Text="Compressing built plugin folder" Condition="$(ConfigurationName) == Release"/>
         <Delete Condition="$(ConfigurationName) == Release"
@@ -59,6 +78,10 @@
                    Directories="$(KSP2DIR)/BepInEx/plugins/$(ProjectName)"/>
         <MakeDir Condition="$(ConfigurationName) == Deploy Or $(ConfigurationName) == DeployAndRun"
                  Directories="$(KSP2DIR)/BepInEx/plugins/$(ProjectName)"/>
+        <RemoveDir Condition="$(ConfigurationName) == Deploy Or $(ConfigurationName) == DeployAndRun"
+                   Directories="$(KSP2DIR)/BepInEx/patchers/$(ProjectName)"/>
+        <MakeDir Condition="$(ConfigurationName) == Deploy Or $(ConfigurationName) == DeployAndRun"
+                 Directories="$(KSP2DIR)/BepInEx/patchers/$(ProjectName)"/>
 
         <ItemGroup Label="Dist folder to be copied">
             <DistFolder Include="$(SolutionDir)/dist/$(ConfigurationName)/BepInEx/**/*.*"/>

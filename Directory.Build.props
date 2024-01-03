@@ -17,6 +17,8 @@
         <PluginBinPath>$(SolutionDir)build/bin/plugin/$(Configuration)</PluginBinPath>
         <PluginObjPath>$(SolutionDir)build/obj/plugin/$(Configuration)</PluginObjPath>
         <BaseOutputPath>$(PluginBinPath)/$(MSBuildProjectName)</BaseOutputPath>
+        <PatcherBinPath>$(SolutionDir)build/bin/patcher/$(Configuration)</PatcherBinPath>
+        <PatcherObjPath>$(SolutionDir)build/obj/patcher/$(Configuration)</PatcherObjPath>
         <BaseIntermediateOutputPath>$(PluginObjPath)/$(MSBuildProjectName)</BaseIntermediateOutputPath>
         <AssemblyName>$(MSBuildProjectName)</AssemblyName>
         <RootNamespace>$(AssemblyName)</RootNamespace>
