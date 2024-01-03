@@ -14,14 +14,14 @@ internal static class AtmosphereScatterManagerPatches
     {
         if (model == null)
             return;
-        LogInfo($"The atmosphere model for {model.PlanetName} has been loaded");
-        LogInfo($"Bottom radius: {model.BottomRadius} km");
-        LogInfo($"Height: {model.AtmosphereHeight} km");
-        LogInfo($"Absorption Height min-max: {model.AbsorptionHeightMinMax.x} - {model.AbsorptionHeightMinMax.y}");
+        // LogInfo($"The atmosphere model for {model.PlanetName} has been loaded");
+        // LogInfo($"Bottom radius: {model.BottomRadius} km");
+        // LogInfo($"Height: {model.AtmosphereHeight} km");
+        // LogInfo($"Absorption Height min-max: {model.AbsorptionHeightMinMax.x} - {model.AbsorptionHeightMinMax.y}");
         if (OverrideManager.AtmosphereOverrides.TryGetValue(model.PlanetName, out var @override))
         {
             @override.ApplyTo(model);
-            LogInfo($"After overrides applied: ");
+            LogInfo($"Applied override to atmosphere for {model.PlanetName}: ");
             LogInfo($"Bottom radius: {model.BottomRadius} km");
             LogInfo($"Height: {model.AtmosphereHeight} km");
             LogInfo($"Absorption Height Min max: {model.AbsorptionHeightMinMax.x} - {model.AbsorptionHeightMinMax.y}");

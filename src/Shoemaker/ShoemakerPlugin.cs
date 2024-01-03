@@ -39,13 +39,6 @@ public class ShoemakerPlugin : BaseSpaceWarpPlugin
         OverrideManager.AtmosphereOverrides[atmosphere.PlanetName] = atmosphere;
     }
 
-    private static void RegisterScaledCloudOverride(TextAsset scaledCloudOverride)
-    {
-        LogInfo($"Loading scaled cloud override: {scaledCloudOverride.name}");
-        var scaledCloud = JsonConvert.DeserializeObject<ScaledCloudOverride>(scaledCloudOverride.text);
-        OverrideManager.ScaledCloudOverrides[scaledCloud.PlanetName] = scaledCloud;
-    }
-
     private static void RegisterVolumeCloudOverride(TextAsset volumeCloudOverride)
     {
         LogInfo($"Loading volume cloud override: {volumeCloudOverride.name}");
@@ -59,8 +52,6 @@ public class ShoemakerPlugin : BaseSpaceWarpPlugin
     public override void OnInitialized()
     {
         GameManager.Instance.Assets.LoadByLabel("atmosphere_overrides", RegisterAtmosphereOverride,
-            delegate(IList<TextAsset> assetLocations) { Addressables.Release(assetLocations); });
-        GameManager.Instance.Assets.LoadByLabel("scaled_cloud_overrides", RegisterScaledCloudOverride,
             delegate(IList<TextAsset> assetLocations) { Addressables.Release(assetLocations); });
         GameManager.Instance.Assets.LoadByLabel("volume_cloud_overrides", RegisterVolumeCloudOverride, 
             delegate(IList<TextAsset> assetLocations) { Addressables.Release(assetLocations); });

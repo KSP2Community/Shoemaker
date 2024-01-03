@@ -21,16 +21,8 @@ internal static class CelestialBodyBehaviourPatches
         var newRadius = newData.data.radius;
         OverrideManager.Scales.TryAdd(name.ToLowerInvariant(), newRadius / oldRadius);
         data.core = newData;
-        
-        LogInfo(
-            $"Following info is from the scaled space load of {data.Data.bodyName}");
-        LogInfo("The scaled space object has the following components:\n");
-        foreach (var component in instance.GetComponents(typeof(UnityObject)))
-        {
-            LogInfo($"- {component.GetType()}");
-        }
     }
-    
+    /*
     [HarmonyPatch(nameof(CelestialBodyBehavior.OnLocalSpaceViewInstantiated))]
     [HarmonyPrefix]
     internal static void LogStuff(CelestialBodyBehavior __instance, GameObject obj)
@@ -44,31 +36,32 @@ internal static class CelestialBodyBehaviourPatches
             LogInfo($"- {component.GetType()}");
         }
         
-        LogInfo($"The local space has the following prefabs\n");
-        if (obj.TryGetComponent(out NestedPrefabSpawner nestedPrefabSpawner))
-        {
-            foreach (var prefab in nestedPrefabSpawner.Prefabs)
-            {
-                LogInfo($"- {prefab.PrefabAssetReference.AssetGUID}");
-                if (prefab.tgtTransform != null)
-                {
-                    LogInfo($"\t- {prefab.tgtTransform.name}");
-                    var operation = prefab.PrefabAssetReference.InstantiateAsync();
-                    operation.Completed += x =>
-                    {
-                        LogInfo($"From previous async handle for {prefab.PrefabAssetReference.AssetGUID}");
-                        var surfaceObject = x.Result.GetComponent<PQSSurfaceObject>();
-                        LogInfo($"Latitude - {surfaceObject.Latitude}");
-                        LogInfo($"Longitude - {surfaceObject.Longitude}");
-                        LogInfo($"Radial Offset - {surfaceObject.RadialOffset}");
-                        LogInfo($"Degrees around radial normal - {surfaceObject.DegreesAroundRadialNormal}");
-                        x.Result.DestroyGameObject();
-                    };
-                }
-            }
-        }
+        // LogInfo($"The local space has the following prefabs\n");
+        // if (obj.TryGetComponent(out NestedPrefabSpawner nestedPrefabSpawner))
+        // {
+        //     foreach (var prefab in nestedPrefabSpawner.Prefabs)
+        //     {
+        //         LogInfo($"- {prefab.PrefabAssetReference.AssetGUID}");
+        //         if (prefab.tgtTransform != null)
+        //         {
+        //             LogInfo($"\t- {prefab.tgtTransform.name}");
+        //             var operation = prefab.PrefabAssetReference.InstantiateAsync();
+        //             operation.Completed += x =>
+        //             {
+        //                 LogInfo($"From previous async handle for {prefab.PrefabAssetReference.AssetGUID}");
+        //                 var surfaceObject = x.Result.GetComponent<PQSSurfaceObject>();
+        //                 LogInfo($"Latitude - {surfaceObject.Latitude}");
+        //                 LogInfo($"Longitude - {surfaceObject.Longitude}");
+        //                 LogInfo($"Radial Offset - {surfaceObject.RadialOffset}");
+        //                 LogInfo($"Degrees around radial normal - {surfaceObject.DegreesAroundRadialNormal}");
+        //                 x.Result.DestroyGameObject();
+        //             };
+        //         }
+        //     }
+        // }
         // var scale = OverrideManager.Scales[__instance.CelestialBodyData.Data.bodyName];
         
         // obj.transform.localScale *= (float)scale;
     }
+    */
 }

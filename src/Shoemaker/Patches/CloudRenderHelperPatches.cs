@@ -23,7 +23,6 @@ public static class CloudRenderHelperPatches
 
     public static void UpdateConfiguration(AsyncOperationHandle<VolumeCloudConfiguration> configurationHandle)
     {
-        LogInfo("Running UpdateConfiguration");
         if (configurationHandle.Status != AsyncOperationStatus.Succeeded) return;
         var bodyName = configurationHandle.Result.bodyName;
         if (!OverrideManager.VolumeCloudOverrides.TryGetValue(bodyName.ToLowerInvariant(),
