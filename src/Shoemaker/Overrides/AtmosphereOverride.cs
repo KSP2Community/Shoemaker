@@ -7,7 +7,7 @@ namespace Shoemaker.Overrides;
 
 [PublicAPI]
 [UsedImplicitly]
-public struct AtmosphereOverride
+public struct AtmosphereOverride : IOverride<AtmosphereModel>
 {
     public string PlanetName;
     public bool? IsGasGiant;
