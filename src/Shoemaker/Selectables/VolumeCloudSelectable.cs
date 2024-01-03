@@ -90,8 +90,8 @@ public sealed class VolumeCloudSelectable : BaseSelectable
             layerName = elementType
         };
         var obj = JObject.FromObject(newLayer);
-        ((JArray)VolumeCloudOverrideObject["LayerOverrides"])!.Add(obj);
-        var selectable = new JTokenSelectable(SetModified, obj, elementType, "layer_override");
+        ((JArray)VolumeCloudOverrideObject["cumulusList"])!.Add(obj);
+        var selectable = new JTokenSelectable(SetModified, obj, elementType, "cloud_data");
         Children.Add(selectable);
         Classes.Add(elementType);
         return selectable;

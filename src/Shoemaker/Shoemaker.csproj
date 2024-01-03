@@ -14,5 +14,8 @@
         <PackageReference Include="SpaceWarp.PluginInfoProps" Version="1.*"/>
         <PackageReference Include="UnityEngine.Modules" Version="2022.3.5"/>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Shoemaker.Patcher\Shoemaker.Patcher.csproj" />
+    </ItemGroup>
 </Project>
 
