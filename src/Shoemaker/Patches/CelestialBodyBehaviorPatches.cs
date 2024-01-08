@@ -11,7 +11,7 @@ namespace Shoemaker.Patches;
 internal static class CelestialBodyBehaviourPatches
 {
     private const string Ksp2UnityToolsLocalPath = "KSP2/Planets/Local";
-    private const string Ksp2UnityToolsScaledPath = "KSP2/Planets/Local";
+    private const string Ksp2UnityToolsScaledPath = "KSP2/Planets/Scaled";
     private const string Ksp2LocalPath = "KSP2/Environment/CelestialBody/CelestialBody_Local";
     private const string Ksp2ScaledPath = "KSP2/Environment/CelestialBody/CelestialBody_Scaled";
     
@@ -19,7 +19,7 @@ internal static class CelestialBodyBehaviourPatches
     [HarmonyPrefix]
     internal static void MergeData(CelestialBodyBehavior __instance, GameObject instance)
     {
-        foreach (var renderer in instance.GetComponents<Renderer>())
+        foreach (var renderer in instance.GetComponents<MeshRenderer>())
         {
             if (renderer.material.shader.name != Ksp2UnityToolsScaledPath) continue;
             var material = renderer.material;

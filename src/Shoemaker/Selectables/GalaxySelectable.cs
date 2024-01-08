@@ -102,6 +102,7 @@ public sealed class GalaxySelectable : BaseSelectable
             OrbiterProperties = new SerializedOribiterDefinition()
         };
         var jToken = JObject.FromObject(obj);
+        ((JArray)GalaxyObject["CelestialBodies"]!).Add(jToken);
         Classes.Add(elementType);
         var selectable = new JTokenSelectable(SetModified, jToken, token => ((JObject)token).Value<string>(), "planet");
         Children.Add(selectable);
