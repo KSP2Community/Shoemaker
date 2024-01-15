@@ -2,14 +2,20 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using KSP.Map;
 using KSP.Sim.impl;
+using Premonition.Core.Attributes;
 using UnityEngine;
 
 namespace Shoemaker.Patches;
 
+[PremonitionAssembly("Assembly-CSharp")]
+[PremonitionType("KSP.Map.Map3DView")]
 internal static class Map3DViewPatches
 {
     private const string Ksp2UnityToolsScaledPath = "KSP2/Planets/Scaled";
     private const string Ksp2ScaledPath = "KSP2/Environment/CelestialBody/CelestialBody_Scaled";
+    
+    [PremonitionMethod("OnMapScaledSpaceCelestialBodyInstantiated")]
+    [PremonitionPrefix]
     [UsedImplicitly]
     private static void OnMapScaledSpaceCelestialBodyInstantiated(GameObject instance)
     {

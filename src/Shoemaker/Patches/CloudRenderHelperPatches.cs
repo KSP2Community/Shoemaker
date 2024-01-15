@@ -1,11 +1,15 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using JetBrains.Annotations;
 using KSP.VolumeCloud;
+using Premonition.Core.Attributes;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Shoemaker.Patches;
 
+[PremonitionAssembly("Assembly-CSharp")]
+[PremonitionType("KSP.VolumeCloud.CloudRenderHelper")]
 public static class CloudRenderHelperPatches
 {
     // [HarmonyPatch(typeof(CloudRenderHelper))]
@@ -21,13 +25,16 @@ public static class CloudRenderHelperPatches
     //     }
     // }
 
-    public static void UpdateConfiguration(AsyncOperationHandle<VolumeCloudConfiguration> configurationHandle)
+    [PremonitionMethod("LoadingConfigCompleted")]
+    [PremonitionPrefix]
+    [UsedImplicitly]
+    public static void UpdateConfiguration(AsyncOperationHandle<VolumeCloudConfiguration> handle)
     {
-        if (configurationHandle.Status != AsyncOperationStatus.Succeeded) return;
-        var bodyName = configurationHandle.Result.bodyName;
+        if (handle.Status != AsyncOperationStatus.Succeeded) return;
+        var bodyName = handle.Result.bodyName;
         if (!OverrideManager.VolumeCloudOverrides.TryGetValue(bodyName.ToLowerInvariant(),
                 out var volumeCloudConfigurationOverride)) return;
         LogInfo($"Found a configuration override for {bodyName}");
-        volumeCloudConfigurationOverride.ApplyTo(configurationHandle.Result);
+        volumeCloudConfigurationOverride.ApplyTo(handle.Result);
     }
 }
